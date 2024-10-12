@@ -6,13 +6,13 @@
 #    By: shrodrig <shrodrig@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 11:37:28 by shrodrig          #+#    #+#              #
-#    Updated: 2024/05/30 20:57:36 by shrodrig         ###   ########.fr        #
+#    Updated: 2024/10/07 17:07:44 by shrodrig         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = test
+NAME = 
 
-SRC = main.c
+SRC = main.c utils.c
 
 OBJS = ${SRC:.c=.o}
 CC = cc

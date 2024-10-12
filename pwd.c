@@ -1,40 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   include_builtins.h                                 :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shrodrig <shrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/22 19:23:28 by sheila            #+#    #+#             */
-/*   Updated: 2024/10/09 14:19:41 by shrodrig         ###   ########.fr       */
+/*   Created: 2024/10/09 11:20:19 by shrodrig          #+#    #+#             */
+/*   Updated: 2024/10/09 11:40:29 by shrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MS_H
-# define MS_H
+#include "include_builtins.h"
 
-#include "libft/libft.h"
-#include <unistd.h>
-#include <stdio.h>
-#include <limits.h>
-#include <stdlib.h>
-#include <errno.h>
-
-typedef	struct s_env
+//obter o caminho atual
+int ft_pwd(void)
 {
-	char	**keys;
-	char 	**values;
-	int		n_env;
-	struct s_env	*next;	
-}	t_env;
+    char pwd[PATH_MAX]; //tamanho maximo do caminho
+    if (getcwd(pwd, sizeof(pwd)) != NULL)
+        ft_putstr_fd(pwd, STDOUT_FILENO);
+    else
+		perror("pwd");//printar a mensaem de erro padrao. 
+    return (1);
+}
 
-typedef	struct s_minishell
+int main(void)
 {
-	t_env	env;
-	char	*cmd;
-	char	**envp;
-	char	**argv;
-	
-}	t_minishell;
-
-#endif
+	ft_pwd();
+	return (0);
+}

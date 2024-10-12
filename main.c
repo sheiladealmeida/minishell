@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
+/*   By: shrodrig <shrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:05:19 by sheila            #+#    #+#             */
-/*   Updated: 2024/09/23 00:17:55 by sheila           ###   ########.fr       */
+/*   Updated: 2024/10/09 11:20:51 by shrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include_builtins.h"
 
-int ft_pwd(void)
+
+/*int ft_pwd(void)
 {
     char pwd[_PC_PATH_MAX];
     if (getcwd(pwd, sizeof(pwd)) != NULL)
@@ -35,11 +36,11 @@ int ft_echo(char **argv)
 	{
         ft_putstr_fd(argv[i], STDOUT_FILENO);
         if (argv[i + 1])
-			printf(" ");
+			ft_putstr_fd(" ", STDOUT_FILENO);
 		i++;
     }
     if (newline)
-	    printf("\n");
+	    ft_putstr_fd("\n", STDOUT_FILENO);
     return (0);
 }
 
@@ -75,25 +76,35 @@ void    ft_exit(char **argv)
         exit(0);
 }
 
-void ft_unset(char **envp, const char *var)
+void init_env(t_minishell *mshell)
+{
+   int i;
+   
+   i = 0;
+
+   
+}
+
+void ft_unset(t_minishell *mshell, char *var)
 {
     int i = 0;
     size_t len = ft_strlen(var);
     
-    if (!**envp || !*var)
+    if (!*var)
         return (0);
-    while (envp[i])
+    while (mshell->keys[i])
     {
-        if (strncmp(envp[i], var, len) == 0 && envp[i][len] == '=')
+        if (strncmp(mshell->keys[i], var, len) == 0 && mshell->keys[i][len] == '=')
         {
-            ft_bzero(envp[i], len);
+            ft_bzero(mshell->keys[i], len);
+            ft_bzero(mshell->values[i], sizeof(mshell->values[i]));
             return;
         }
         i++;
     }
 }
 
-int ft_export(char **args)
+int ft_export(t_minishell *mshell, char *args)
 {
     if (args[1] != NULL)
     {
@@ -122,18 +133,17 @@ int ft_export(char **args)
             }
         }
         else
-            printf("Erro: formato inválido. Use KEY=VALUE\n");
+            ft_putstr_fd("Erro: formato inválido. Use KEY=VALUE\n", STDOUT_FILENO);
         free(key);
         free(value);
     }
     else
-        printf("Erro: Nenhum argumento fornecido. Use KEY=VALUE\n");
+        ft_putstr_fd("Erro: Nenhum argumento fornecido. Use KEY=VALUE\n", STDOUT_FILENO);
     return 1;
-}
+}*/
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
-    (void)argc;
     ft_exit(argv);
     return 0;
 }
