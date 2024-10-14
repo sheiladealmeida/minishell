@@ -6,13 +6,13 @@
 /*   By: shrodrig <shrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/09 10:56:58 by shrodrig          #+#    #+#             */
-/*   Updated: 2024/10/09 11:19:35 by shrodrig         ###   ########.fr       */
+/*   Updated: 2024/10/14 17:06:44 by shrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include_builtins.h"
 
-void init_get(t_minishell *mshell)
+void init_env(t_minishell *mshell)
 {
     int i;
     char **key;
@@ -38,7 +38,7 @@ void init_get(t_minishell *mshell)
         value = ft_strchr(mshell->envp[i], '=');
         if (value != NULL)
             mshell->env.values[i] = ft_strdup(value);
-        printf("Key: %s, Value: %s\n", mshell->env.keys[i], mshell->env.values[i]);
+        //printf("Key: %s, Value: %s\n", mshell->env.keys[i], mshell->env.values[i]);
         free(key[0]);
         free(key[1]);
         free(key);
@@ -80,7 +80,7 @@ int main(int argc, char **argv, char **envp)
     int i = 0;
     init_struct(&mshell, &mshell.env, envp);
     
-    while(mshell.envp[i])
-        printf("%s\n", mshell.envp[i++]);
+    // while(mshell.envp[i])
+    //     printf("%s\n", mshell.envp[i++]);
     return 0;
 }

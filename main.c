@@ -6,86 +6,13 @@
 /*   By: shrodrig <shrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/19 12:05:19 by sheila            #+#    #+#             */
-/*   Updated: 2024/10/09 11:20:51 by shrodrig         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:56:05 by shrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "include_builtins.h"
 
-
-/*int ft_pwd(void)
-{
-    char pwd[_PC_PATH_MAX];
-    if (getcwd(pwd, sizeof(pwd)) != NULL)
-        ft_putstr_fd(pwd, STDOUT_FILENO);
-    else
-		perror("pwd");
-    return (1);
-}
-
-int ft_echo(char **argv)
-{
-    int newline = 1;
-	int	i = 1;
-    if (argv[1] && ft_strncmp(argv[1], "-n", 3) == 0)
-	{
-        newline = 0;
-        i++;
-    }
-    while(argv[i])
-	{
-        ft_putstr_fd(argv[i], STDOUT_FILENO);
-        if (argv[i + 1])
-			ft_putstr_fd(" ", STDOUT_FILENO);
-		i++;
-    }
-    if (newline)
-	    ft_putstr_fd("\n", STDOUT_FILENO);
-    return (0);
-}
-
-int	is_num(char *str)
-{
-    if(!str)
-        return (0);
-    else
-    {
-	    while (*str)
-	    {
-	    	if (!(*str >= '0' && *str <= '9'))
-	    		return (0);
-	    	str++;
-	    }
-    }
-	return (1);
-}
-
-void    ft_exit(char **argv)
-{
-	//FREE?
-	if (argv[1] && argv[2] != NULL)
-		ft_putstr_fd("exit\nexit: too many arguments", STDOUT_FILENO);
-    else if (argv[1] && !is_num(argv[1]))
-		ft_putstr_fd("exit\nnumeric argument required", STDOUT_FILENO);
-	else if (argv[1])
-    {
-        //TRATAR %256
-		exit(ft_atoi(argv[1]));
-    }
-    else
-        exit(0);
-}
-
-void init_env(t_minishell *mshell)
-{
-   int i;
-   
-   i = 0;
-
-   
-}
-
-void ft_unset(t_minishell *mshell, char *var)
+/*void ft_unset(t_minishell *mshell, char *var)
 {
     int i = 0;
     size_t len = ft_strlen(var);

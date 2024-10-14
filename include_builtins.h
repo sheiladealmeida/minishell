@@ -6,7 +6,7 @@
 /*   By: shrodrig <shrodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 19:23:28 by sheila            #+#    #+#             */
-/*   Updated: 2024/10/09 14:19:41 by shrodrig         ###   ########.fr       */
+/*   Updated: 2024/10/14 16:48:03 by shrodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef	struct s_minishell
 	char	*cmd;
 	char	**envp;
 	char	**argv;
+	int		e_code;
 	
 }	t_minishell;
 
