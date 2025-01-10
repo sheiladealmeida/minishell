@@ -14,9 +14,14 @@
 
 char	*go_path(t_minishell *mshell, char *env)
 {
-	char		*path;
+	char	*path;
+	char	*value;
 
-	path = ft_strdup(get_value(mshell, env));
+	value = get_value(mshell, env);
+	if (value)
+		path = ft_strdup(value);
+	else
+		path = NULL;
 	if (!path)
 	{
 		if (ft_strcmp(env, "HOME") == 0)
