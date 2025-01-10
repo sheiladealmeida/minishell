@@ -3,74 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: shrodrig <shrodrig@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/19 12:05:19 by sheila            #+#    #+#             */
-/*   Updated: 2024/10/14 16:56:05 by shrodrig         ###   ########.fr       */
+/*   Created: 2024/11/13 10:33:59 by sheila            #+#    #+#             */
+/*   Updated: 2025/01/09 02:23:45 by sheila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include_builtins.h"
+#include "includes/minishell.h"
 
-/*void ft_unset(t_minishell *mshell, char *var)
+int	g_e_code;
+
+void	handle_signal_main(void)
 {
-    int i = 0;
-    size_t len = ft_strlen(var);
-    
-    if (!*var)
-        return (0);
-    while (mshell->keys[i])
-    {
-        if (strncmp(mshell->keys[i], var, len) == 0 && mshell->keys[i][len] == '=')
-        {
-            ft_bzero(mshell->keys[i], len);
-            ft_bzero(mshell->values[i], sizeof(mshell->values[i]));
-            return;
-        }
-        i++;
-    }
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, ft_reset_prompt);
 }
 
-int ft_export(t_minishell *mshell, char *args)
+void	main_exec(t_minishell *mshell, char *input)
 {
-    if (args[1] != NULL)
-    {
-        char *key = NULL;
-        char *value = NULL;
-        char *var = ft_strchr(args[1], '=');
+	mshell->commands = parse_input(input);
+	if (mshell->commands)
+		handle_exec(mshell);
+	if (mshell->commands)
+	{
+		free_cmd(mshell->commands);
+		mshell->commands = NULL;
+	}
+}
 
-        if (var)
-        {
-            int key_len = var - args[1];
-            key = malloc(key_len + 1);
-            if (!key)
-            {
-                ft_putstr_fd("Error: malloc", STDOUT_FILENO);
-                return 1;
-            }
-            ft_strncpy(key, args[1], key_len);
-            key[key_len] = '\0';
-
-            value = ft_strdup(var + 1);
-            if (!value)
-            {
-                ft_putstr_fd("Error: strdup", STDOUT_FILENO);
-                free(key);
-                return 1;
-            }
-        }
-        else
-            ft_putstr_fd("Erro: formato inválido. Use KEY=VALUE\n", STDOUT_FILENO);
-        free(key);
-        free(value);
-    }
-    else
-        ft_putstr_fd("Erro: Nenhum argumento fornecido. Use KEY=VALUE\n", STDOUT_FILENO);
-    return 1;
-}*/
-
-int main(int argc, char **argv, char **envp)
+void	read_input(t_minishell mshell)
 {
-    ft_exit(argv);
-    return 0;
+	char	*input;
+
+	input = NULL;
+	while (1)
+	{
+		handle_signal_main();
+		input = readline("minishell> ");
+		if (!input)
+		{
+			printf("exit\n");
+			break ;
+		}
+		if (*input == '\0')
+			continue ;
+		if (*input)
+			add_history(input);
+		if (val_sintax(input) > 0)
+			continue ;
+		main_exec(&mshell, input);
+		free(input);
+	}
+}
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_minishell	mshell;
+
+	(void)argc;
+	(void)argv;
+	init_struct(&mshell, envp);
+	g_e_code = 0;
+	read_input(mshell);
+	clear_mshell(&mshell);
 }

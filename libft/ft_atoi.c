@@ -17,9 +17,9 @@ RETURN VALUE: The converted value.*/
 
 int	ft_atoi(const char *nptr)
 {
-	int	sin;
-	int	result;
-	int	i;
+	int		sin;
+	int		result;
+	int		i;
 
 	sin = 1;
 	i = 0;
