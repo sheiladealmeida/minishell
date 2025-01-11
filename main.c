@@ -63,7 +63,10 @@ int	main(int argc, char **argv, char **envp)
 	t_minishell	mshell;
 
 	if (argc > 1)
+	{
 		error_msg(*argv, "too many arguments", 2);
+		return (2);
+	}
 	else
 	{
 		init_struct(&mshell, envp);
