@@ -6,7 +6,7 @@
 #    By: sheila <sheila@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 11:37:28 by shrodrig          #+#    #+#              #
-#    Updated: 2025/01/09 02:30:48 by sheila           ###   ########.fr        #
+#    Updated: 2025/01/11 18:18:18 by sheila           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,5 @@ leaks: readline.supp
 # 	@echo "    fun:add_history" >> readline.supp
 # 	@echo "}" >> readline.supp
 
-#valgrind --suppressions=readline.supp --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --trace-children=yes --gen-suppressions=all -s --log-file=output.log ./$(NAME)
 
 .PHONY: all clean fclean re

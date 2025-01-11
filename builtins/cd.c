@@ -6,7 +6,7 @@
 /*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:19:07 by sheila            #+#    #+#             */
-/*   Updated: 2025/01/09 01:19:37 by sheila           ###   ########.fr       */
+/*   Updated: 2025/01/11 18:17:04 by sheila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	ft_cd(t_minishell *mshell, t_token *token)
 		path = go_path(mshell, "HOME");
 	else
 		get_path(mshell, token->next, &path);
-	if (g_e_code == 1 || !path || !*path)
+	if (g_e_code == 1 || !path)
 	{
 		free(path);
 		return ;
