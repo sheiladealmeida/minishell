@@ -6,7 +6,7 @@
 #    By: sheila <sheila@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/06 11:37:28 by shrodrig          #+#    #+#              #
-#    Updated: 2025/01/11 18:18:18 by sheila           ###   ########.fr        #
+#    Updated: 2025/01/12 02:19:15 by sheila           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 CC = cc
 RM = rm -f
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 INCLUDE = -I ./includes
 LIBFT_PATH = libft
 LIBFT = -L ${LIBFT_PATH} -lft -lreadline
