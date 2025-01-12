@@ -6,7 +6,7 @@
 /*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:19:07 by sheila            #+#    #+#             */
-/*   Updated: 2025/01/12 14:57:19 by sheila           ###   ########.fr       */
+/*   Updated: 2025/01/12 15:16:36 by sheila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,10 @@ char	*go_path(t_minishell *mshell, char *env)
 
 char	*check_tilde(t_minishell *mshell, char *input)
 {
-	char	*path_exp;
 	char	*clean;
-	char	*tmp;
 
 	if (!input || (input[0] == '~' && input[1] == '\0'))
-		return (path_exp = go_path(mshell, "HOME"));
-	else if (input[0] == '~')
-	{
-		tmp = go_path(mshell, "HOME");
-		if (!tmp)
-			return (ft_strdup(input));
-		else
-			return (path_exp = ft_strjoin(go_path(mshell, "HOME"), input + 1));
-	}
+		return (go_path(mshell, "HOME"));
 	clean = handle_quotes(input, 0, 0);
 	if (input[0] == '$' || ((input[0] == '\"' && input[1] == '$')))
 	{
