@@ -6,7 +6,7 @@
 /*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/14 13:31:10 by shrodrig          #+#    #+#             */
-/*   Updated: 2025/01/09 01:35:32 by sheila           ###   ########.fr       */
+/*   Updated: 2025/01/12 14:59:35 by sheila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	exit_mshell(t_minishell *mshell, char *cmd_name)
 {
-	if (g_e_code != 1)
+	if (g_e_code != 1 || ft_atoi(mshell->commands->tokens->next->input) == 1)
 	{
 		free(cmd_name);
 		close_pipes(mshell->commands);

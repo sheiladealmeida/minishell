@@ -6,7 +6,7 @@
 /*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:19:07 by sheila            #+#    #+#             */
-/*   Updated: 2025/01/12 12:59:54 by sheila           ###   ########.fr       */
+/*   Updated: 2025/01/12 14:57:19 by sheila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*go_path(t_minishell *mshell, char *env)
 
 	value = get_value(mshell, env);
 	if (value)
-		path = (value);
+		path = ft_strdup(value);
 	else
 		path = NULL;
 	if (!path)
@@ -83,6 +83,8 @@ char	*path_clean(t_minishell *mshell, char *input)
 
 void	get_path(t_minishell *mshell, t_token *token, char **path)
 {
+	char	*temp;
+
 	if (token->next)
 	{
 		error_msg("cd", "too many arguments", 1);
@@ -90,16 +92,17 @@ void	get_path(t_minishell *mshell, t_token *token, char **path)
 	}
 	else if (token->input[0] == '~')
 	{
-		*path = go_path(mshell, "HOME");
-		if (token->input[1] != '\0' && *path)
-			*path = ft_strjoin(go_path(mshell, "HOME"), token->input + 1);
+		temp = go_path(mshell, "HOME");
+		if (token->input[1] != '\0' && temp)
+		{
+			*path = ft_strjoin(temp, token->input + 1);
+			free(temp);
+		}
+		else
+			*path = temp;
 	}
 	else if (token->input[0] == '-' && token->input[1] == '\0')
-	{
-		*path = go_path(mshell, "OLDPWD");
-		if (*path)
-			ft_putendl_fd(*path, STDOUT_FILENO);
-	}
+		cd_minus(mshell, path);
 	else
 		*path = path_clean(mshell, token->input);
 }
