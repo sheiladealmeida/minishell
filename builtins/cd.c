@@ -6,7 +6,7 @@
 /*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/20 15:19:07 by sheila            #+#    #+#             */
-/*   Updated: 2025/01/12 02:17:51 by sheila           ###   ########.fr       */
+/*   Updated: 2025/01/12 12:59:54 by sheila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char	*go_path(t_minishell *mshell, char *env)
 
 	value = get_value(mshell, env);
 	if (value)
-		path = ft_strdup(value);
+		path = (value);
 	else
 		path = NULL;
 	if (!path)
@@ -83,7 +83,6 @@ char	*path_clean(t_minishell *mshell, char *input)
 
 void	get_path(t_minishell *mshell, t_token *token, char **path)
 {
-	g_e_code = 0;
 	if (token->next)
 	{
 		error_msg("cd", "too many arguments", 1);
@@ -113,6 +112,7 @@ void	ft_cd(t_minishell *mshell, t_token *token)
 
 	oldpwd = get_value(mshell, "PWD");
 	path = NULL;
+	g_e_code = 0;
 	if (!token->next || !token->next->input)
 		path = go_path(mshell, "HOME");
 	else

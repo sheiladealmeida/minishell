@@ -6,7 +6,7 @@
 /*   By: sheila <sheila@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/22 16:56:31 by shrodrig          #+#    #+#             */
-/*   Updated: 2025/01/04 22:59:05 by sheila           ###   ########.fr       */
+/*   Updated: 2025/01/12 13:07:47 by sheila           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,45 @@ void	remove_env(t_minishell *mshell, char *key)
 	}
 }
 
+bool	check_unset(char *input)
+{
+	int		i;
+
+	i = 0;
+	if (!ft_isalpha(input[i]) && input[i] != '_')
+	{
+		error_msg("unset", "not a valid identifier", 1);
+		return (false);
+	}
+	while (input[++i])
+	{
+		if (input[i] == '=')
+			break ;
+		if (!ft_isalnum(input[i]) && input[i] != '_')
+		{
+			error_msg("unset", "not a valid identifier", 1);
+			return (false);
+		}
+	}
+	return (true);
+}
+
 void	ft_unset(t_minishell *mshell, t_token *tokens)
 {
 	t_token	*temp;
 
 	temp = tokens;
 	temp = temp->next;
+	g_e_code = 0;
 	while (temp)
 	{
 		if (!temp->input)
 			return ;
+		if (!check_unset(temp->input))
+		{
+			temp = temp->next;
+			continue ;
+		}
 		remove_env(mshell, temp->input);
 		temp = temp->next;
 	}
